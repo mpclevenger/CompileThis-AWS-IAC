@@ -29,6 +29,19 @@ Resources:
         IgnorePublicAcls: false
         RestrictPublicBuckets: false
 
+  MyCertificate:
+    Type: AWS::CertificateManager::Certificate
+    Properties:
+      DomainName: compilethis.io
+      SubjectAlternativeNames:
+        - www.compilethis.io
+      ValidationMethod: DNS
+      DomainValidationOptions:
+        - DomainName: compilethis.io
+          ValidationDomain: compilethis.io
+        - DomainName: www.compilethis.io
+          ValidationDomain: compilethis.io
+
   MySiteDistribution:
     Type: AWS::CloudFront::Distribution
     Properties:
@@ -36,7 +49,7 @@ Resources:
         Enabled: true
         DefaultRootObject: index.html
         DefaultCacheBehavior:
-          ViewerProtocolPolicy: allow-all
+          ViewerProtocolPolicy: redirect-to-https
           TargetOriginId: ctwebsite11002.s3-website-us-east-1.amazonaws.com
           # Cache behavior
           DefaultTTL: 0
@@ -50,6 +63,9 @@ Resources:
             Id: ctwebsite11002.s3-website-us-east-1.amazonaws.com 
             CustomOriginConfig:
               OriginProtocolPolicy: match-viewer
+        ViewerCertificate:
+          AcmCertificateArn: !Ref MyCertificate
+          SslSupportMethod: sni-only
 
   CTWebsitePolicy:
     Type: AWS::S3::BucketPolicy
