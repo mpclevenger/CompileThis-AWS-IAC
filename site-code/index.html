@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" contents="Your description goes here">
+        <meta name="keywords" content="one, two, three">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+            <title>Compile This</title>
+        
+            <link rel="stylesheet" href="css/reset.css">
+            <link rel="stylesheet" href="css/styles.css">
+
+        <!-- Fonts -->
+
+        <!-- Jetbrains Mono -->
+        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+        <!-- Inter -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+        <!-- Share Tech -->
+        <link href="https://fonts.googleapis.com/css2?family=Share+Tech&family=VT323&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+
+
+        <!-- VT323 -->
+        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+    </head>
+
+    <body>
+
+        <header class="navbar">
+          <div class="navbar-container">
+            <nav>
+              <ul class="top-nav">
+                <li><a href="#into">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#visitors">Visitors</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+
+        <!-- Main Section -->
+        <main>
+
+            <!-- Intro -->
+            <div class="intro">
+                <!-- Logo -->
+                <img src="assets/logo.png" alt="compile this logo">
+                <!-- Name -->
+                 <h1>compilethis</h1>
+                <!-- Tagline -->
+                <h5>Compiling chaos into code</h5>
+                <!-- Button  -->
+                <button class="btn-view-projects">View Projects</button>
+            </div>
+
+
+
+            <div class="section"> 
+                <h3>About</h3>
+                <p>I'm a software developer specializing in building (and occasionally designing) exceptional digital experiences.</p>
+            </div>
+
+            <div class="section">
+              <h3>Selected Works</h3>
+              <article>
+                <div class="cli-card">
+                  <div class="cli-header">
+                    <h6>
+                      Portfolio Site
+                    </h6>  
+                  </div>
+                  <div class="cli-body">
+                    <h5>
+                      A fully serverless personal portfolio site built with React and Tailwind CSS, hosted on AWS S3 with CloudFront CDN and secured with HTTPS via AWS Certificate Manager.
+Deployed through GitHub Actions for continuous integration and delivery, and configured with Route 53 for custom domain management. This project highlights modern front-end development paired with robust AWS infrastructure.
+                    </h5>  
+                    <p><strong>Stack:</strong> HTML, CSS, AWS S3, CloudFront</p>
+                      <p><strong>Link:</strong> <a href="https://www.compilethis.io/" target="_blank">View Site</a></p>
+                      <p><strong>Code:</strong> <a href="https://github.com/mpclevenger" target="_blank">GitHub</a></p>
+                  </div>
+                </div>
+              </article>
+              <article>
+                <div class="cli-card">
+                  <div class="cli-header">
+                    <h6>
+                      LambdaTasks API
+                    </h6>  
+                  </div>
+                  <div class="cli-body">
+                    <h5>
+                      A lightweight, serverless task management API built using AWS Lambda, API Gateway, and DynamoDB.
+It supports full CRUD operations and is designed with scalable, event-driven architecture in mind. Monitoring and logging are handled with AWS CloudWatch, and IAM roles are used to secure access between services.
+                    </h5>  
+                    <p><strong>Stack:</strong> API Gateway, Lambda, DynamoDB, IAM, CloudWatch</p>
+                      <p><strong>Link:</strong> <a href="https://www.compilethis.io/" target="_blank">View Site</a></p>
+                      <p><strong>Code:</strong> <a href="https://github.com/mpclevenger" target="_blank">GitHub</a></p>
+                  </div>
+                </div>
+              </article>
+                    
+              <article>
+                <div class="cli-card">
+                  <div class="cli-header">
+                    <h6>
+                      ShortStack
+                    </h6>  
+                  </div>
+                  <div class="cli-body">
+                    <h5>
+                      A cloud-native URL shortener that transforms long links into compact, shareable URLs, powered by AWS Lambda and DynamoDB.
+It features real-time redirection via API Gateway and tracks usage metrics, stored in DynamoDB and visualized through CloudWatch dashboards. The project demonstrates serverless application design and data modeling for high availability.
+                    </h5>  
+                    <p> It's basically a bitly clone...</p>
+                    <br>
+                    <p><strong>Stack:</strong> Lambda, API Gateway, DynamoDB (or RDS), CloudFront, S3, optionally SQS or SNS</p>
+                      <p><strong>Link:</strong> <a href="https://www.compilethis.io/" target="_blank">View Site</a></p>
+                      <p><strong>Code:</strong> <a href="https://github.com/mpclevenger" target="_blank">GitHub</a></p>
+                  </div>
+                </div>
+              </article>
+                      
+            </div>
+  
+
+            <div class="visitors">
+              <script src="js/visitorCounter.js"></script>
+              <p> people have visited this page.</p>
+          </div>
+        </main>
+
+        
+        
+             <!-- Footer -->
+        <footer id="contact" class="contact">
+          <a href="https://github.com/mpclevenger" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
+              <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/madison-clevenger-2481a1251/" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
+              <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="mailto:hello@compilethis.io" aria-label="Email" rel="noopener noreferrer">
+              <i class="fas fa-envelope"></i>
+          </a>
+        </footer>
+
+         <script type="text/javascript" src="js/main.js"></script>
+         <script>
+            const toggle = document.querySelector('.nav-toggle');
+            const navLinks = document.querySelector('.nav-links');
+          
+            toggle.addEventListener('click', () => {
+              navLinks.classList.toggle('show');
+            });
+          </script>
+
+    </body>
+</html>

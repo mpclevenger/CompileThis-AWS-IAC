@@ -21,9 +21,47 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: ctwebsite11002
-      AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+
+  MySiteDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        DefaultRootObject: index.html
+        DefaultCacheBehavior:
+          ViewerProtocolPolicy: allow-all
+          TargetOriginId: ctwebsite11002.s3-website-us-east-1.amazonaws.com
+          # Cache behavior
+          DefaultTTL: 0
+          MinTTL: 0
+          MaxTTL: 0
+          # End cache behavior
+          ForwardedValues:
+            QueryString: false
+        Origins:
+          - DomainName: ctwebsite11002.s3-website-us-east-1.amazonaws.com 
+            Id: ctwebsite11002.s3-website-us-east-1.amazonaws.com 
+            CustomOriginConfig:
+              OriginProtocolPolicy: match-viewer
+
+  CTWebsitePolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref NewCTWebsite
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${NewCTWebsite}/*"
 
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
