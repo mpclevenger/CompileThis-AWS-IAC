@@ -48,9 +48,12 @@ Resources:
       DistributionConfig:
         Enabled: true
         DefaultRootObject: index.html
+        Aliases:
+          - compilethis.io
+          - www.compilethis.io
         DefaultCacheBehavior:
           ViewerProtocolPolicy: redirect-to-https
-          TargetOriginId: ctwebsite11002.s3-website-us-east-1.amazonaws.com
+          TargetOriginId: S3WebsiteOrigin
           # Cache behavior
           DefaultTTL: 0
           MinTTL: 0
@@ -59,13 +62,14 @@ Resources:
           ForwardedValues:
             QueryString: false
         Origins:
-          - DomainName: ctwebsite11002.s3-website-us-east-1.amazonaws.com 
-            Id: ctwebsite11002.s3-website-us-east-1.amazonaws.com 
+          - DomainName: !Sub "${NewCTWebsite}.s3-website-${AWS::Region}.amazonaws.com" 
+            Id: S3WebsiteOrigin 
             CustomOriginConfig:
-              OriginProtocolPolicy: match-viewer
+              OriginProtocolPolicy: http-only
         ViewerCertificate:
-          AcmCertificateArn: !Ref MyCertificate
+          AcmCertificateArn: "arn:aws:acm:us-east-1:480754951124:certificate/209f6720-4a20-444b-ac26-b28e3be2241a"
           SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2021
 
   CTWebsitePolicy:
     Type: AWS::S3::BucketPolicy
