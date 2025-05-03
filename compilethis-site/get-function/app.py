@@ -8,6 +8,7 @@ TABLE_NAME = os.environ["TABLE_NAME"]
 dynamodb = boto3.client('dynamodb')
 
 def lambda_handler(event, context):
+  TABLE_NAME = os.environ["TABLE_NAME"] 
   try:
     response = dynamodb.get_item(
         TableName = TABLE_NAME,

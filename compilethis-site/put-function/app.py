@@ -10,6 +10,7 @@ from botocore.exceptions import ClientError
 dynamodb = boto3.client('dynamodb')
 
 def lambda_handler(event, context):
+  TABLE_NAME = os.environ["TABLE_NAME"] 
   if event["httpMethod"] == "OPTIONS":
     return {
         "statusCode": 200,
