@@ -242,6 +242,10 @@ html {
   padding: 1rem;
 }
 
+#replaceme {
+  gap: 2px;
+}
+
 
 /* Responsive: 430px and under */
 @media (max-width: 430px) {

@@ -137,8 +137,7 @@ It features real-time redirection via API Gateway and tracks usage metrics, stor
   
 
             <div id = "visitors" class="visitors">
-              <script src="js/visitorCounter.js"></script>
-              <p> people have visited this page.</p>
+              <p><span id="visitorcounter"></span> people have visited this page.</p>
           </div>
         </main>
 
@@ -156,8 +155,14 @@ It features real-time redirection via API Gateway and tracks usage metrics, stor
               <i class="fas fa-envelope"></i>
           </a>
         </footer>
+        <script>
+          fetch('https://dmu2l4s9d3.execute-api.us-east-1.amazonaws.com/Prod/get-function')
+              .then(response => response.json())
+              .then((data) => {
+                  document.getElementById('visitorcounter').innerText = data.count
+              })
+        </script>
 
-         <script type="text/javascript" src="js/main.js"></script>
          <script>
             const toggle = document.querySelector('.nav-toggle');
             const navLinks = document.querySelector('.nav-links');
@@ -166,6 +171,5 @@ It features real-time redirection via API Gateway and tracks usage metrics, stor
               navLinks.classList.toggle('show');
             });
           </script>
-
     </body>
 </html>

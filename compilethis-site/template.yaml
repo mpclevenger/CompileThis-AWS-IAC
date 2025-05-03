@@ -83,20 +83,36 @@ Resources:
             Action: "s3:GetObject"
             Resource: !Sub "arn:aws:s3:::${NewCTWebsite}/*"
 
-  HelloWorldFunction:
+  GetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: hello_world/
-      Handler: app.lambda_handler
+      CodeUri: get-function/
+      Handler: get-function
       Runtime: python3.13
       Architectures:
       - x86_64
       Events:
-        HelloWorld:
+        GetFunctionEvents:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /hello
+            Path: /get
             Method: get
+
+  PutFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: put-function/
+      Handler: put-function
+      Runtime: python3.13
+      Architectures:
+      - x86_64
+      Events:
+        PutFunctionEvents:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /put
+            Method: get
+
 
   ApplicationResourceGroup:
     Type: AWS::ResourceGroups::Group
@@ -111,16 +127,45 @@ Resources:
       ResourceGroupName:
         Ref: ApplicationResourceGroup
       AutoConfigurationEnabled: 'true'
+
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: cloud-resume-challenge
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: "ID"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "ID"
+          KeyType: "HASH"
+
+
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  HelloWorldApi:
-    Description: API Gateway endpoint URL for Prod stage for Hello World function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
-    Description: Hello World Lambda Function ARN
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+  GetFunctionApi:
+    Description: API Gateway endpoint URL for Prod stage for GetFunction
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/get"
+  
+  GetFunctionArn:
+    Description: ARN of the GetFunction Lambda function
+    Value: !GetAtt GetFunction.Arn
+
+  GetFunctionIamRole:
+    Description: Implicit IAM Role created for GetFunction
+    Value: !GetAtt GetFunctionRole.Arn
+  
+  PutFunctionApi:
+    Description: API Gateway endpoint URL for Prod stage for PutFunction
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/put"
+  
+
+  PutFunctionArn:
+    Description: ARN of the PutFunction Lambda function
+    Value: !GetAtt PutFunction.Arn
+
+  PutFunctionIamRole:
+    Description: Implicit IAM Role created for PutFunction
+    Value: !GetAtt PutFunctionRole.Arn
