@@ -1,17 +1,17 @@
 import json
 
-# import requests
-import json
+import os
 import boto3
 from botocore.exceptions import ClientError
 
+TABLE_NAME = os.environ["TABLE_NAME"]
 dynamodb = boto3.client('dynamodb')
 
 def lambda_handler(event, context):
   try:
     response = dynamodb.get_item(
-        TableName ="cloud-resume-challenge",
-        Keys={
+        TableName = TABLE_NAME,
+        Key={
             "ID": {"S": "visitors"}
         }
     )
@@ -38,6 +38,7 @@ def lambda_handler(event, context):
     },
     "body": json.dumps({ "count": count})
   }
+
   
   """Sample pure Lambda function
 
@@ -67,4 +68,5 @@ def lambda_handler(event, context):
   #     print(e)
 
   #     raise e
+
 

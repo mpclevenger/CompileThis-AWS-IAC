@@ -5,7 +5,7 @@ codeuri = "/Users/mardi/Documents/repos/IAC-AWS/compilethis-site/put-function"
 runtime = "python3.13"
 architecture = "x86_64"
 handler = "put-function"
-manifest_hash = "3298f13049d19cffaa37ca931dd4d421"
+manifest_hash = "47d75532dc408da8e27b6490f244b061"
 packagetype = "Zip"
 functions = ["PutFunction"]
 
@@ -14,7 +14,7 @@ codeuri = "/Users/mardi/Documents/repos/IAC-AWS/compilethis-site/get-function"
 runtime = "python3.13"
 architecture = "x86_64"
 handler = "get-function"
-manifest_hash = "3298f13049d19cffaa37ca931dd4d421"
+manifest_hash = "47d75532dc408da8e27b6490f244b061"
 packagetype = "Zip"
 functions = ["GetFunction"]
 

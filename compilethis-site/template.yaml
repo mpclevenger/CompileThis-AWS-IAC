@@ -87,10 +87,16 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: get-function/
-      Handler: get-function
+      Handler: app.lambda_handler
       Runtime: python3.13
       Architectures:
       - x86_64
+      Environment:
+        Variables:
+          TABLE_NAME: cloud-resume-challenge
+      Policies:
+        - DynamoDBCrudPolicy: #Standard one from AWS - look up in docs
+            TableName: cloud-resume-challenge
       Events:
         GetFunctionEvents:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -102,16 +108,28 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: put-function/
-      Handler: put-function
+      Handler: app.lambda_handler
       Runtime: python3.13
       Architectures:
       - x86_64
+      Environment:
+        Variables:
+          TABLE_NAME: cloud-resume-challenge
+      Policies:
+        - DynamoDBCrudPolicy: #Standard one from AWS - look up in docs
+            TableName: cloud-resume-challenge
       Events:
         PutFunctionEvents:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /put
-            Method: get
+            Method: put
+
+        PutFunctionOptions:
+          Type: Api
+          Properties:
+            Path: /put
+            Method: options
 
 
   ApplicationResourceGroup:

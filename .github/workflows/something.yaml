@@ -1,0 +1,39 @@
+name: main
+on: push
+env:
+  PYTHON_VERSION: "3.13"
+
+jobs:
+  test-infra:
+    runs-on: ubuntu-latest
+    timeoutminutes: 2
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+      
+      - name: Install dependencies (get)
+        run: | 
+          pip install -r compilethis-site/get-function/requirements.txt
+          pip install pytest
+
+
+      - name: Test get-function
+        run: |
+          cd compilethis-site/get-function
+          pytest
+
+      - name: Install dependencies (put)
+        run: | 
+          pip install -r compilethis-site/put-function/requirements.txt
+          pip install pytest
+
+
+      - name: Test get-function
+        run: |
+          cd compilethis-site/put-function
+          pytest   

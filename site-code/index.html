@@ -137,7 +137,7 @@ It features real-time redirection via API Gateway and tracks usage metrics, stor
   
 
             <div id = "visitors" class="visitors">
-              <p><span id="visitorcounter"></span> people have visited this page.</p>
+              <p><span id="visitor-count"></span> people have visited this page.</p>
           </div>
         </main>
 
@@ -156,20 +156,24 @@ It features real-time redirection via API Gateway and tracks usage metrics, stor
           </a>
         </footer>
         <script>
-          fetch('https://dmu2l4s9d3.execute-api.us-east-1.amazonaws.com/Prod/get-function')
+          fetch('https://dmu2l4s9d3.execute-api.us-east-1.amazonaws.com/Prod/put',{method: 'PUT'})
+              .then(() => fetch('https://dmu2l4s9d3.execute-api.us-east-1.amazonaws.com/Prod/get'))
               .then(response => response.json())
               .then((data) => {
-                  document.getElementById('visitorcounter').innerText = data.count
+                  document.getElementById('visitor-count').innerText = data.count;
               })
+              .catch((error) => {
+                console.error("Visitor count fetch error:", error);
+              });
         </script>
 
-         <script>
+         <!-- <script>
             const toggle = document.querySelector('.nav-toggle');
             const navLinks = document.querySelector('.nav-links');
           
             toggle.addEventListener('click', () => {
               navLinks.classList.toggle('show');
             });
-          </script>
+          </script> -->
     </body>
 </html>
