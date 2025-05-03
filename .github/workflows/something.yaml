@@ -6,7 +6,7 @@ env:
 jobs:
   test-infra:
     runs-on: ubuntu-latest
-    timeoutminutes: 2
+    timeout-minutes: 2
     
     steps:
       - uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
           pip install pytest
 
 
-      - name: Test get-function
+      - name: Test put-function
         run: |
           cd compilethis-site/put-function
           pytest   
