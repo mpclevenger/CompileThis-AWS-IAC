@@ -2,9 +2,6 @@ import os
 import json
 import boto3
 
-TABLE_NAME = os.environ["TABLE_NAME"]
-
-
 from botocore.exceptions import ClientError
 
 dynamodb = boto3.client('dynamodb')

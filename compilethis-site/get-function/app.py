@@ -4,7 +4,6 @@ import os
 import boto3
 from botocore.exceptions import ClientError
 
-TABLE_NAME = os.environ["TABLE_NAME"]
 dynamodb = boto3.client('dynamodb')
 
 def lambda_handler(event, context):
