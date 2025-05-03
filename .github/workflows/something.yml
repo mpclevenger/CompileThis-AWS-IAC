@@ -25,7 +25,7 @@ jobs:
       - name: Test get-function
         run: |
           cd compilethis-site/get-function
-          pytest || true
+          pytest
 
       - name: Install dependencies (put)
         run: | 
@@ -36,4 +36,23 @@ jobs:
       - name: Test put-function
         run: |
           cd compilethis-site/put-function
-          pytest || true
+          pytest
+
+  build-and-deploy-infra:
+    needs: test-infra
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: aws-actions/setup-sam@v1
+      - uses: aws-actions/configure-aws-credentials@v1
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - run: sam build
+        working-directory: compilethis-site
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-change-set
+        working-directory: compilethis-site
