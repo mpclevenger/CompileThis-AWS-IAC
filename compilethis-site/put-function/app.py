@@ -4,7 +4,7 @@ import boto3
 
 from botocore.exceptions import ClientError
 
-dynamodb = boto3.client('dynamodb')
+dynamodb = boto3.client('dynamodb',region_name="us-east-1")
 
 def lambda_handler(event, context):
   TABLE_NAME = os.environ["TABLE_NAME"] 
