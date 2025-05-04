@@ -63,8 +63,7 @@ jobs:
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --delete
-        env:
-          AWS_S3_BUCKET: ctwebsite11002
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: site-code
+          source-dir: site-code
+          destination-bucket: ctwebsite11002
