@@ -5,9 +5,20 @@ import boto3
 from botocore.exceptions import ClientError
 
 dynamodb = boto3.client('dynamodb',region_name="us-east-1")
-TABLE_NAME = os.environ("TABLE_NAME")
 
 def lambda_handler(event, context):
+  TABLE_NAME = os.environ["TABLE_NAME"] 
+  
+  if event.get("httpMethod") == "OPTIONS":
+    return {
+        "statusCode": 200,
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, OPTIONS",
+            "Access-Control-Allow-Headers": "*"
+        }
+    }
+  
   try:
     response = dynamodb.get_item(
         TableName = TABLE_NAME,
